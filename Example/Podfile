@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SwiftlyPro_Example' do
+  pod 'SwiftlyPro', :path => '../'
+
+  target 'SwiftlyPro_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
