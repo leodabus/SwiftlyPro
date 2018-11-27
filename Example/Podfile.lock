@@ -1,0 +1,16 @@
+PODS:
+  - SwiftlyPro (0.1.0)
+
+DEPENDENCIES:
+  - SwiftlyPro (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftlyPro:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SwiftlyPro: 0a37f9b119ef05b89dbb1960e5e266d764938459
+
+PODFILE CHECKSUM: 17994230ee6d88ff0e982ecbb44436941fd82468
+
+COCOAPODS: 1.5.3

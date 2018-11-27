@@ -1,0 +1,6 @@
+framework module Pods_SwiftlyPro_Example {
+  umbrella header "Pods-SwiftlyPro_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

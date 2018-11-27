@@ -1,0 +1,6 @@
+framework module SwiftlyPro {
+  umbrella header "SwiftlyPro-umbrella.h"
+
+  export *
+  module * { export * }
+}
