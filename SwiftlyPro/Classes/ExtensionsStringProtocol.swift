@@ -45,13 +45,13 @@ public extension StringProtocol {
 }
 
 public extension StringProtocol where Index == String.Index {
-    public func index(of string: Self, options: String.CompareOptions = []) -> Index? {
+    public func startIndex(of string: Self, options: String.CompareOptions = []) -> Index? {
         return range(of: string, options: options)?.lowerBound
     }
     public func endIndex(of string: Self, options: String.CompareOptions = []) -> Index? {
         return range(of: string, options: options)?.upperBound
     }
-    public func indices(of string: Self, options: String.CompareOptions = []) -> [Index] {
+    public func startIndexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
         var result: [Index] = []
         var start = startIndex
         while start < endIndex,
@@ -62,7 +62,7 @@ public extension StringProtocol where Index == String.Index {
         }
         return result
     }
-    public func endIndices(of string: Self, options: String.CompareOptions = []) -> [Index] {
+    public func endIndexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
         var result: [Index] = []
         var start = startIndex
         while start < endIndex,
