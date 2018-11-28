@@ -36,6 +36,7 @@ class ViewController: UIViewController {
         print(test[10...].string)  // "🇺🇸!!! Hello Brazil 🇧🇷!!!"
         let arr = [1,2,3]
         print(arr[safe: 3] ?? "nil")
+        
     }
 
     override func didReceiveMemoryWarning() {
