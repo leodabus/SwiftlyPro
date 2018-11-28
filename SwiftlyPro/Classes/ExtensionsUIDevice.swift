@@ -8,6 +8,7 @@
 import UIKit
 public extension UIDevice {
     
+    /// Returns the model name of the device
     public var modelName: String {
         if let modelName = ProcessInfo.processInfo.environment["SIMULATOR_MODEL_IDENTIFIER"] { return modelName }
         var info = utsname()
@@ -21,12 +22,18 @@ public extension UIDevice {
         })
     }
     
+    /// Returns it´s iPhone X
+
     public var iPhoneX: Bool {
         return UIScreen.main.nativeBounds.height == 2436
     }
+    
+    /// Returns if the device is an iPhone
     public var iPhone: Bool {
         return UIDevice.current.userInterfaceIdiom == .phone
     }
+    
+    /// Returns the screen type
     public enum ScreenType: String {
         case iPhones_4_4S = "iPhone 4 or iPhone 4S"
         case iPhones_5_5s_5c_SE = "iPhone 5, iPhone 5s, iPhone 5c or iPhone SE"
@@ -37,6 +44,8 @@ public extension UIDevice {
         case iPhone_XSMax = "iPhone XS Max"
         case unknown
     }
+    
+    /// Returns the screen type
     public var screenType: ScreenType {
         switch UIScreen.main.nativeBounds.height {
         case 960:
@@ -57,6 +66,4 @@ public extension UIDevice {
             return .unknown
         }
     }
-
-    
 }
