@@ -85,13 +85,29 @@ public extension StringProtocol where Index == String.Index {
         return result
     }
 
-    func encodedOffset(of element: Element) -> Int? {
+    public func encodedOffset(of element: Element) -> Int? {
         return index(of: element)?.encodedOffset
     }
-    func encodedOffset(of string: Self) -> Int? {
+    public func encodedOffset(of string: Self) -> Int? {
         return range(of: string)?.lowerBound.encodedOffset
     }
+
+    //    Finds a text between two strings and returns it
+    //    let text = "word(abc)"
+    //    if let found = text.getString(between: "(", and: ")") {
+    //        print("found:", found)  // "found: abc"
+    //    }
+    
+    func getString(between start: Self, and end: Self) -> SubSequence? {
+        guard  let lowerRange = range(of: start),
+            let upperRange  = self[lowerRange.upperBound..<endIndex].range(of: end)
+            else {
+                return nil
+        }
+        return self[lowerRange.upperBound..<upperRange.lowerBound]    // "abc"
+    }
 }
+
 
 public extension StringProtocol {
     public var isValidCPF: Bool {
