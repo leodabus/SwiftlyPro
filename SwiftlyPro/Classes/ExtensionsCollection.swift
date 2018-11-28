@@ -8,6 +8,16 @@
 import Foundation
 
 public extension Collection {
+    //    https://stackoverflow.com/a/47544741/2303865
+    //
+    //    let objects: [Any] = [1,[2,3],"a",["b",["c","d"]]]
+    //    let joined = objects.joined()   // [1, 2, 3, "a", "b", "c", "d"]
+    //
+    //    let integers = objects.flatMapped(with: Int.self)  // [1, 2, 3]
+    //    // setting the type explicitly
+    //    let integers2: [Int] = objects.flatMapped()        // [1, 2, 3]
+    //    // or casting
+    //    let strings = objects.flatMapped() as [String]     // ["a", "b", "c", "d"]
     public func joined() -> [Any] {
         return flatMap { ($0 as? [Any])?.joined() ?? [$0] }
     }
@@ -75,3 +85,5 @@ public extension Collection where Element: Equatable {
         }
     }
 }
+
+
