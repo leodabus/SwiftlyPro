@@ -7,6 +7,11 @@
 
 import UIKit
 public extension UIImage {
+    /// Returns a resized image
+    ///
+    ///
+    /// - Parameters:
+    ///     - percentage: Of how much you would like to resize the image
     public func resized(withPercentage percentage: CGFloat) -> UIImage? {
         let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
         UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
@@ -22,6 +27,7 @@ public extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
+
 public extension UIImage {
     public var isPortrait:  Bool    { return size.height > size.width }
     public var isLandscape: Bool    { return size.width > size.height }
