@@ -86,4 +86,36 @@ public extension Collection where Element: Equatable {
     }
 }
 
+// Collection of Hashable Elements
+public extension Collection where Element: Hashable {
+    // counts the occurrences of an element in a collection
+    public var frequency: [Element: Int] {
+        return reduce(into: [:]) { $0[$1, default: 0] += 1 }
+    }
+    // returns the number of occurrences of an element in a collection
+    public func frequency(of element: Element) -> Int {
+        return frequency[element] ?? 0
+    }
+    
+    // returns the maximum value in a collection
+    public var maxValue: (Element, Int)? {
+        return frequency.max(by: { $0.value < $1.value })
+    }
+    // returns the minimum value in a collection
+    public var minValue: (Element, Int)? {
+        return frequency.min(by: { $0.value < $1.value })
+    }
+
+    
+}
+public extension Collection where Element: Hashable, Element: Comparable {
+    // returns the maximum key in a collection
+    public var maxKey: (Element, Int)? {
+        return frequency.max(by: { $0.key < $1.key })
+    }
+    // returns the minimum key in a collection
+    public var minKey: (Element, Int)? {
+        return frequency.min(by: { $0.key < $1.key })
+    }
+}
 

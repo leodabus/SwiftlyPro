@@ -29,8 +29,10 @@ public extension UIImage {
 }
 
 public extension UIImage {
-    public var isPortrait:  Bool    { return size.height > size.width }
     public var isLandscape: Bool    { return size.width > size.height }
+    public var isPortrait:  Bool    { return size.height > size.width }
+    public var lenghtBleed: CGFloat { return isLandscape ? size.width-size.height :
+        size.height-size.width }
     public var breadth:     CGFloat { return min(size.width, size.height) }
     public var breadthSize: CGSize  { return CGSize(width: breadth, height: breadth) }
     public var breadthRect: CGRect  { return CGRect(origin: .zero, size: breadthSize) }
@@ -77,11 +79,11 @@ public extension UIImage {
     
     // usage:
     //    let profilePicture = UIImage(data: try! Data(contentsOf: URL(string:"http://i.stack.imgur.com/Xs4RX.jpg")!))!
-    //    if let face =  profilePicture.datectFaces().first {
+    //    if let face =  profilePicture.detectFaces().first {
     //        print(face.size)
     //    }
-
-    public func detectFaces() -> [UIImage] {
+    // set highAccuracy to true if the detector should choose techniques that are higher in accuracy, even if it requires more processing time.
+    public func detectFaces(highAccuracy: Bool = false) -> [UIImage] {
         guard let ciimage = CIImage(image: self) else { return [] }
         var orientation: NSNumber {
             switch imageOrientation {
@@ -95,7 +97,7 @@ public extension UIImage {
             case .left:          return 8
             }
         }
-        return CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyLow])?
+        return CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy: highAccuracy ? CIDetectorAccuracyHigh : CIDetectorAccuracyLow])?
             .features(in: ciimage, options: [CIDetectorImageOrientation: orientation])
             .compactMap {
                 let rect = $0.bounds.insetBy(dx: -10, dy: -10)
@@ -103,18 +105,68 @@ public extension UIImage {
                 defer { UIGraphicsEndImageContext() }
                 UIImage(ciImage: ciimage.cropped(to: rect)).draw(in: CGRect(origin: .zero, size: rect.size))
                 guard let face = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-                // now that you have your face image you need to properly apply a circle mask to it
                 let size = face.size
                 let breadth = min(size.width, size.height)
                 let breadthSize = CGSize(width: breadth, height: breadth)
                 UIGraphicsBeginImageContextWithOptions(breadthSize, false, scale)
                 defer { UIGraphicsEndImageContext() }
-                guard let cgImage = face.cgImage?.cropping(to: CGRect(origin: CGPoint(x: size.width > size.height ? (size.width-size.height).rounded(.down)/2 : 0, y: size.height > size.width ? (size.height-size.width).rounded(.down)/2 : 0), size: breadthSize))
+                guard let cgImage = face.cgImage?
+                    .cropping(to:
+                        CGRect(origin:
+                            CGPoint(x: isLandscape ? lenghtBleed.rounded(.down)/2 : 0,
+                                    y: isPortrait  ? lenghtBleed.rounded(.down)/2 : 0),
+                                size: breadthSize))
                     else { return nil }
-                let faceRect = CGRect(origin: .zero, size: CGSize(width: min(size.width, size.height), height: min(size.width, size.height)))
+                let faceRect = CGRect(origin: .zero,
+                                      size: CGSize(width:  min(size.width, size.height),
+                                                   height: min(size.width, size.height)))
                 UIBezierPath(ovalIn: faceRect).addClip()
                 UIImage(cgImage: cgImage).draw(in: faceRect)
                 return UIGraphicsGetImageFromCurrentImageContext()
             } ?? []
+    }
+}
+public extension UIImage {
+
+    /// SwiftlyPro: a method to tint an image with a specific color
+    ///
+    /// - Parameters:
+    ///   - color: color to be used.
+    /// - Returns: the image instance tinted with the specified color.
+    public func tinted(with color: UIColor) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        color.set()
+        withRenderingMode(.alwaysTemplate)
+            .draw(in: CGRect(origin: .zero, size: size))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+    // Usage:
+    // let camera = UIImage(data: try! Data(contentsOf: URL(string: "https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-camera-128.png")!))!
+    // let redCmera = camera.tinted(with: .red)
+    //
+    
+    public func filled(with color: UIColor, blendMode: CGBlendMode = .multiply) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        defer { UIGraphicsEndImageContext() }
+        guard
+            let context = UIGraphicsGetCurrentContext(),
+            let cgImage = cgImage
+        else { return nil }
+        let canvas = CGRect(origin: .zero, size: size)
+        context.clip(to: canvas, mask: cgImage)
+        color.setFill()
+        UIRectFill(canvas)
+        draw(in: canvas, blendMode: blendMode, alpha: 1)
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+}
+extension URL {
+    var resourceIsReachable: Bool {
+        return (try? checkResourceIsReachable()) == true
+    }
+    var data: Data? {
+        guard resourceIsReachable else { return nil }
+        return try? Data(contentsOf: self)
     }
 }
