@@ -18,3 +18,33 @@ extension RangeReplaceableCollection where Element: Equatable {
         return (false, element)
     }
 }
+extension RangeReplaceableCollection  {
+    mutating func removeEvenIndexElements() {
+        var bool = true
+        removeAll { _ in
+            defer { bool = !bool }
+            return bool
+        }
+    }
+    mutating func removeOddIndexElements() {
+        var bool = false
+        removeAll { _ in
+            defer { bool = !bool }
+            return bool
+        }
+    }
+    func evenIndexElements() -> Self {
+        var bool = true
+        return filter { _ in
+            defer { bool = !bool }
+            return bool
+        }
+    }
+    func oddIndexElements() -> Self {
+        var bool = false
+        return filter { _ in
+            defer { bool = !bool }
+            return bool
+        }
+    }
+}
