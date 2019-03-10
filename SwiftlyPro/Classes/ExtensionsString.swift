@@ -13,7 +13,8 @@ public extension String {
     }
     
     public var foldingAccents: String {
-        return folding(options: .diacriticInsensitive, locale: Locale(identifier: "en_US_POSIX"))
+     
+        return folding(options: .diacriticInsensitive, locale: .posix)
     }
     
     public var html2AttributedString: NSAttributedString? {

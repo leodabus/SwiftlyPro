@@ -25,3 +25,6 @@ public extension Calendar {
     public static let persian = Calendar(identifier: .persian)
     public static let republicOfChina = Calendar(identifier: .republicOfChina)
 }
+public extension Locale {
+    public static let posix = Locale(identifier: "en_US_POSIX")
+}
