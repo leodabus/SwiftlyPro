@@ -96,8 +96,13 @@ public extension Collection where Element: Equatable {
             $0.append([$1])
         }
     }
+    public func indices(of element: Element) -> [Index] {
+        return indices.filter { self[$0] == element }
+    }
+    public func indices(where isIncluded: (Element) -> Bool) -> [Index] {
+        return indices.filter { isIncluded(self[$0]) }
+    }
 }
-
 
 
 public extension Collection where Element: StringProtocol, Element.Index == String.Index {
