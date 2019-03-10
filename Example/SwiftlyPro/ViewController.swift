@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        print("LeonardoDabus".substring(upTo: "Dabus") ?? "")
         let date = Date().iso8601
         print(date)
         let test = "Hello USA 🇺🇸!!! Hello Brazil 🇧🇷!!!"
@@ -36,7 +36,10 @@ class ViewController: UIViewController {
         print(test[10...].string)  // "🇺🇸!!! Hello Brazil 🇧🇷!!!"
         let arr = [1,2,3]
         print(arr[safe: 3] ?? "nil")
-        
+//        "word"
+        let array5 = ["Cafe B","Café C","Café A"]
+        let sorted5 = array5.localizedSorted(.orderedAscending)
+        print(sorted5) // "["Café A", "Cafe B", "Café C"]\n"
     }
 
     override func didReceiveMemoryWarning() {

@@ -6,14 +6,8 @@
 //
 
 import Foundation
-
 public extension StringProtocol {
-    
-    public var string: String {
-        return String(self)
-    }
-    
-    
+  
     /// returns an array of all ascii values of the string
     public var ascii: [UInt32] {
         return compactMap { $0.ascii }
@@ -45,13 +39,23 @@ public extension StringProtocol {
 }
 
 public extension StringProtocol where Index == String.Index {
-    public func startIndex(of string: Self, options: String.CompareOptions = []) -> Index? {
+    
+    public var range: Range<Index> {
+        return startIndex..<endIndex
+    }
+    public var nsRange: NSRange {
+        return NSRange(range, in: self)
+    }
+
+    func index(of string: Self, options: String.CompareOptions = []) -> Index? {
         return range(of: string, options: options)?.lowerBound
     }
+    
     public func endIndex(of string: Self, options: String.CompareOptions = []) -> Index? {
         return range(of: string, options: options)?.upperBound
     }
-    public func startIndexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
+    
+    public func indexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
         var result: [Index] = []
         var start = startIndex
         while start < endIndex,
@@ -62,6 +66,7 @@ public extension StringProtocol where Index == String.Index {
         }
         return result
     }
+    
     public func endIndexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
         var result: [Index] = []
         var start = startIndex
@@ -84,6 +89,26 @@ public extension StringProtocol where Index == String.Index {
         }
         return result
     }
+    
+    public func nsRange(of string: Self, options: String.CompareOptions = [], range: Range<Index>? = nil, locale: Locale? = nil) -> NSRange? {
+        guard let range = self.range(of: string, options: options, range: range ?? startIndex..<endIndex, locale: locale ?? .current) else { return nil }
+        return NSRange(range, in: self)
+    }
+    
+    public func nsRanges(of string: Self, options: String.CompareOptions = [], range: Range<Index>? = nil, locale: Locale? = nil) -> [NSRange] {
+        var start = range?.lowerBound ?? startIndex
+        let end = range?.upperBound ?? endIndex
+        var ranges: [NSRange] = []
+        while start < end, let range = self.range(of: string, options: options, range: start..<end, locale: locale ?? .current) {
+            ranges.append(NSRange(range, in: self))
+            start = range.upperBound
+        }
+        return ranges
+    }
+    
+    func nsRange(from range: Range<Index>) -> NSRange {
+        return NSRange(range, in: self)
+    }
 
     public func encodedOffset(of element: Element) -> Int? {
         return index(of: element)?.encodedOffset
@@ -97,15 +122,68 @@ public extension StringProtocol where Index == String.Index {
     //    if let found = text.getString(between: "(", and: ")") {
     //        print("found:", found)  // "found: abc"
     //    }
-    
-    func getString(between start: Self, and end: Self) -> SubSequence? {
-        guard  let lowerRange = range(of: start),
-            let upperRange  = self[lowerRange.upperBound..<endIndex].range(of: end)
+    func substring(upTo string: Self, options: String.CompareOptions = [], range: Range<Index>? = nil, locale: Locale? = nil) -> SubSequence? {
+        guard  let lowerBound = self.range(of: string, options: options, locale: locale)?.lowerBound
+        else { return nil }
+        return self[..<lowerBound]    // "abc"
+    }
+    func substring(between start: Self, and end: Self, options: String.CompareOptions = [], locale: Locale? = nil) -> SubSequence? {
+        guard
+            let lowerRange = self.range(of: start, options: options, locale: locale),
+            let upperRange  = self[lowerRange.upperBound..<endIndex].range(of: end, options: options, locale: locale)
             else {
                 return nil
         }
         return self[lowerRange.upperBound..<upperRange.lowerBound]    // "abc"
     }
+
+    var lines: [SubSequence] {
+        return substrings(separated: .byLines)
+    }
+    var words: [SubSequence] {
+        return substrings(separated: .byWords)
+    }
+    var sentences: [SubSequence] {
+        return substrings(separated: .bySentences)
+    }
+    var paragraphs: [SubSequence] {
+        return substrings(separated: .byParagraphs)
+    }
+    func substrings(separated options: String.EnumerationOptions)-> [SubSequence] {
+        var substrings: [SubSequence] = []
+        enumerateSubstrings(in: startIndex..., options: options) {
+            _, range, _, _ in substrings.append(self[range])
+        }
+        return substrings
+    }
+    func ranges(separated options: String.EnumerationOptions)-> [Range<Index>] {
+        var ranges: [Range<Index>] = []
+        enumerateSubstrings(in: startIndex..., options: options) {
+            _, range, _, _ in ranges.append(range)
+        }
+        return ranges
+    }
+    
+    
+    var firstLineRange: Range<Index> {
+        return lineRange(for: ..<startIndex)
+    }
+    var lastLineRange: Range<Index> {
+        return lineRange(for: endIndex...)
+    }
+    var firstLineNSRange: NSRange {
+        return NSRange(firstLineRange, in: self)
+    }
+    var lastLineNSRange: NSRange {
+        return NSRange(lastLineRange, in: self)
+    }
+    var firstLine: SubSequence {
+        return  self[firstLineRange]
+    }
+    var lastLine: SubSequence {
+        return  self[lastLineRange]
+    }
+    
 }
 
 
@@ -168,5 +246,35 @@ public extension StringProtocol {
             numbers[0] * 6 ) % 11
         let dv2 = soma2 > 9 ? 0 : soma2
         return dv1 == numbers[12] && dv2 == numbers[13]
+    }
+}
+extension StringProtocol {
+    var hexa2Bytes: [UInt8] {
+        let hexa = Array(self)
+        return stride(from: 0, to: count, by: 2).compactMap { UInt8(String(hexa[$0..<$0.advanced(by: 2)]), radix: 16) }
+    }
+}
+
+extension StringProtocol where Self: RangeReplaceableCollection {
+    mutating func insert(separator: Self, every n: Int) {
+        for index in indices.reversed() where index != startIndex &&
+            distance(from: startIndex, to: index) % n == 0 {
+                insert(contentsOf: separator, at: index)
+        }
+    }
+    
+    func inserting(separator: Self, every n: Int) -> Self {
+        var string = self
+        string.insert(separator: separator, every: n)
+        return string
+    }
+}
+extension StringProtocol where Index == String.Index {
+    func distance(to element: Element) -> Int? {
+        guard let index = index(of: element) else { return nil }
+        return distance(from: startIndex, to: index)
+    }
+    func distance(to string: Self, options: String.CompareOptions = []) -> Int? {
+        return range(of: string, options: options)?.lowerBound.encodedOffset
     }
 }

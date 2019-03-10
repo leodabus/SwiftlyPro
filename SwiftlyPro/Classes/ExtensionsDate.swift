@@ -11,10 +11,26 @@ public extension Formatter {
     public struct Date {
         public static let iso8601: DateFormatter = {
             let formatter = DateFormatter()
+            #if os(Linux)
+            formatter.calendar = Calendar(identifier: .gregorian)
+            #else
             formatter.calendar = Calendar(identifier: .iso8601)
+            #endif
             formatter.locale = Locale(identifier: "en_US_POSIX")
             formatter.timeZone = TimeZone(secondsFromGMT: 0)
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+            return formatter
+        }()
+        static let iso8601standard: DateFormatter = {
+            let formatter = DateFormatter()
+            #if os(Linux)
+            formatter.calendar = Calendar(identifier: .gregorian)
+            #else
+            formatter.calendar = Calendar(identifier: .iso8601)
+            #endif
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
             return formatter
         }()
     }
@@ -22,26 +38,27 @@ public extension Formatter {
 
 public extension Date {
     /// Returns a new Date representing the date calculated by adding an amount of a specific component using current calendar
-    public func adding(_ component:  Calendar.Component, value: Int, wrappingComponents: Bool = false) -> Date? {
-        return Calendar.current.date(byAdding: component, value: value, to: self, wrappingComponents: wrappingComponents)
+    public func adding(_ component:  Calendar.Component, value: Int, wrappingComponents: Bool = false, calendar: Calendar = .current) -> Date? {
+        return calendar.date(byAdding: component, value: value, to: self, wrappingComponents: wrappingComponents)
     }
     /// Returns a new Date representing the date calculated by setting hour, minute, and second using current calendar
-    public func setting(hour:  Int, minute: Int, second: Int, matchingPolicy: Calendar.MatchingPolicy = .strict, repeatedTimePolicy: Calendar.RepeatedTimePolicy = .first, direction: Calendar.SearchDirection = .forward) -> Date? {
-        return Calendar.current.date(bySettingHour: hour, minute: minute, second: second, of: self, matchingPolicy: matchingPolicy, repeatedTimePolicy: repeatedTimePolicy, direction: direction)
+    public func setting(hour:  Int, minute: Int, second: Int, matchingPolicy: Calendar.MatchingPolicy = .strict, repeatedTimePolicy: Calendar.RepeatedTimePolicy = .first, direction: Calendar.SearchDirection = .forward, calendar: Calendar = .current) -> Date? {
+        return calendar.date(bySettingHour: hour, minute: minute, second: second, of: self, matchingPolicy: matchingPolicy, repeatedTimePolicy: repeatedTimePolicy, direction: direction)
     }
     
     public var noon: Date {
         return setting(hour: 12, minute: 0, second: 0)!
     }
     
+
+    public static var yesterday: Date {
+        return Date().noon.adding(.day, value: -1)!
+    }
     public static var today: Date {
         return Date().noon
     }
-    public static var yesterday: Date {
-        return Date.today.adding(.day, value: -1)!
-    }
     public static var tomorrow: Date {
-        return Date.today.adding(.day, value: 1)!
+        return Date().noon.adding(.day, value: 1)!
     }
     
     
@@ -79,10 +96,13 @@ public extension Date {
     
     public var nextSecond: Date {
         let date = self
-        return Calendar.autoupdatingCurrent.date(bySettingHour: date.hour, minute: date.minute, second: date.second + 1, of: date) ?? Date()
+        return Calendar.current.date(bySettingHour: date.hour, minute: date.minute, second: date.second + 1, of: date) ?? Date()
     }
-    public var daysCountInSameMonth: Int {
-        return Calendar.autoupdatingCurrent.range(of: .day, in: .month, for: self)!.count
+    public var daysInMonth: Int {
+        return Calendar.current.range(of: .day, in: .month, for: self)!.count
+    }
+    public var daysInYear: Int {
+        return Calendar.current.range(of: .day, in: .year, for: self)!.count
     }
     public var nextShift: Date {
         guard let hour = dateComponents.hour, let year = dateComponents.year, let month = dateComponents.month, let day = dateComponents.day
@@ -149,34 +169,34 @@ public extension Date {
 extension Date {
 
     var startOfMonth: Date {
-        return  DateComponents(calendar: .current, year: year, month: month, day: 1).date!
+        return DateComponents(calendar: .current, year: year, month: month, day: 1).date!
     }
     var startOfNextMonth: Date {
-        return  DateComponents(calendar: .current, year: year, month: month+1, day: 1).date!
+        return DateComponents(calendar: .current, year: year, month: month+1, day: 1).date!
     }
     
     var firstDayOfMonth: Date {
-        return  DateComponents(calendar: .current, year: year, month: month, day: 1, hour: 12).date!
+        return DateComponents(calendar: .current, year: year, month: month, day: 1, hour: 12).date!
     }
     var lastDayOfMonth: Date {
-        return  DateComponents(calendar: .current, year: year, month: month+1, day: 0, hour: 12).date!
+        return DateComponents(calendar: .current, year: year, month: month+1, day: 0, hour: 12).date!
     }
     
     var firstDayOfPreviousMonth: Date {
-        return  DateComponents(calendar: .current, year: year, month: month+1, day: 1, hour: 12).date!
+        return DateComponents(calendar: .current, year: year, month: month+1, day: 1, hour: 12).date!
     }
     var lastDayOfPreviousMonth: Date {
-        return  DateComponents(calendar: .current, year: year, month: month+2, day: 0, hour: 12).date!
+        return DateComponents(calendar: .current, year: year, month: month+2, day: 0, hour: 12).date!
     }
     
     var firstDayOfNextMonth: Date {
-        return  DateComponents(calendar: .current, year: year, month: month+1, day: 1, hour: 12).date!
+        return DateComponents(calendar: .current, year: year, month: month+1, day: 1, hour: 12).date!
     }
     var lastDayOfNextMonth: Date {
-        return  DateComponents(calendar: .current, year: year, month: month+2, day: 0, hour: 12).date!
+        return DateComponents(calendar: .current, year: year, month: month+2, day: 0, hour: 12).date!
     }
     func date(byAddingDays days: Int) -> Date {
-        return  Calendar.current.date(byAdding: .day, value: days, to: self)!
+        return Calendar.current.date(byAdding: .day, value: days, to: self)!
     }
     enum Weekday: Int {
         case Sunday = 1, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
@@ -203,23 +223,23 @@ extension Date {
     }
     
     var isBirthDay: Bool {
-        return  Calendar.current.date(Date(), matchesComponents: DateComponents(month: month, day: day))
+        return Calendar.current.date(Date(), matchesComponents: DateComponents(month: month, day: day))
     }
     var isBirthDayTomorrow: Bool {
         let date = Date()
-        return  Calendar.current.date(Date.tomorrow, matchesComponents: DateComponents(month: date.month, day: date.day))
+        return Calendar.current.date(Date.tomorrow, matchesComponents: DateComponents(month: date.month, day: date.day))
     }
     var isInToday: Bool {
-        return  Calendar.current.isDateInToday(self)
+        return Calendar.current.isDateInToday(self)
     }
     var isInTomorrow: Bool {
-        return  Calendar.current.isDateInTomorrow(self)
+        return Calendar.current.isDateInTomorrow(self)
     }
     var isInWeekend: Bool {
-        return  Calendar.current.isDateInWeekend(self)
+        return Calendar.current.isDateInWeekend(self)
     }
     var isInYesterday: Bool {
-        return  Calendar.current.isDateInYesterday(self)
+        return Calendar.current.isDateInYesterday(self)
     }
     var isSunday: Bool {
         return Calendar(identifier: .gregorian).component(.weekday, from: self) == 1
@@ -231,22 +251,22 @@ extension Date {
         return self < Date.today
     }
     func isEqualTo(_ date: Date, toGranularity: Calendar.Component) -> Bool {
-        return  Calendar.current.isDate(self, equalTo: date, toGranularity: toGranularity)
+        return Calendar.current.isDate(self, equalTo: date, toGranularity: toGranularity)
     }
     func inSameDayAsDate(_ date: Date) -> Bool {
-        return  Calendar.current.isDate(self, inSameDayAs: date)
+        return Calendar.current.isDate(self, inSameDayAs: date)
     }
     func date(byAdding unit: Calendar.Component, value: Int) -> Date {
-        return  Calendar.current.date(byAdding: unit, value: value, to: self) ?? Date.distantFuture
+        return Calendar.current.date(byAdding: unit, value: value, to: self) ?? Date.distantFuture
     }
-    func date(byAdding comps: DateComponents) -> Date {
-        return  Calendar.current.date(byAdding: comps, to: self) ?? Date.distantFuture
+    func date(byAdding comps: DateComponents) -> Date? {
+        return  Calendar.current.date(byAdding: comps, to: self)
     }
-    func date(bySettingHour hour: Int, minute: Int, second: Int)-> Date {
-        return  Calendar.current.date(bySettingHour: hour, minute: minute, second: second, of: self) ?? .distantFuture
+    func date(bySettingHour hour: Int, minute: Int, second: Int)-> Date? {
+        return  Calendar.current.date(bySettingHour: hour, minute: minute, second: second, of: self)
     }
-    func date(bySetting component: Calendar.Component, value: Int) -> Date {
-        return  Calendar.current.date(bySetting: component, value: value, of: self) ?? .distantFuture
+    func date(bySetting component: Calendar.Component, value: Int) -> Date? {
+        return  Calendar.current.date(bySetting: component, value: value, of: self)
     }
     
 }

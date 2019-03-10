@@ -24,6 +24,18 @@ public extension Collection {
     public func flatMapped<T>(with type: T.Type? = nil) -> [T] {
         return joined().compactMap { $0 as? T }
     }
+   
+    public var pairs: [SubSequence] {
+        var startIndex = self.startIndex
+        let count = self.count
+        let n = count/2 + (count % 2 == 0 ? 0 : 1)
+        return (0..<n).map { _ in
+            let endIndex = index(startIndex, offsetBy: 2, limitedBy: self.endIndex) ?? self.endIndex
+            defer { startIndex = endIndex }
+            return self[startIndex..<endIndex]
+        }
+    }
+    
 }
 
 public extension Collection where Self: BidirectionalCollection  {
@@ -86,36 +98,18 @@ public extension Collection where Element: Equatable {
     }
 }
 
-// Collection of Hashable Elements
-public extension Collection where Element: Hashable {
-    // counts the occurrences of an element in a collection
-    public var frequency: [Element: Int] {
-        return reduce(into: [:]) { $0[$1, default: 0] += 1 }
-    }
-    // returns the number of occurrences of an element in a collection
-    public func frequency(of element: Element) -> Int {
-        return frequency[element] ?? 0
+
+
+public extension Collection where Element: StringProtocol, Element.Index == String.Index {
+    public func caseInsensitiveSorted(_ result: ComparisonResult) -> [Element] {
+        return sorted { $0.caseInsensitiveCompare($1) == result }
     }
     
-    // returns the maximum value in a collection
-    public var maxValue: (Element, Int)? {
-        return frequency.max(by: { $0.value < $1.value })
+    public func localizedSorted(_ result: ComparisonResult) -> [Element] {
+        return sorted { $0.localizedCompare($1) == result }
     }
-    // returns the minimum value in a collection
-    public var minValue: (Element, Int)? {
-        return frequency.min(by: { $0.value < $1.value })
+    public func localizedCaseInsensitiveSorted(_ result: ComparisonResult) -> [Element] {
+        return sorted { $0.localizedCaseInsensitiveCompare($1) == result }
     }
-
     
 }
-public extension Collection where Element: Hashable, Element: Comparable {
-    // returns the maximum key in a collection
-    public var maxKey: (Element, Int)? {
-        return frequency.max(by: { $0.key < $1.key })
-    }
-    // returns the minimum key in a collection
-    public var minKey: (Element, Int)? {
-        return frequency.min(by: { $0.key < $1.key })
-    }
-}
-

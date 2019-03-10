@@ -22,4 +22,8 @@ public extension Data {
     public var html2String: String {
         return html2AttributedString?.string ?? ""
     }
+    /// dumps the first n of bytes of Data into any object Type
+    public func object<T>() -> T {
+        return withUnsafeBytes { $0.pointee }
+    }
 }

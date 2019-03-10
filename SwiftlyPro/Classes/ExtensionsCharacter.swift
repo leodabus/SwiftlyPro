@@ -7,9 +7,9 @@
 
 import Foundation
 public extension Character {
-    public var string: String {
-        return String(self)
-    }
+//    public var string: String {
+//        return String(self)
+//    }
     public var isAscii: Bool {
         return unicodeScalars.first?.isASCII == true
     }

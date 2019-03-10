@@ -19,7 +19,13 @@
 		4518254621A5841600A27FAA /* ExtensionsNumeric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4518254521A5841600A27FAA /* ExtensionsNumeric.swift */; };
 		452B07CD21AF3D1D004B72A2 /* ExtensionsBidirectionalCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B07CC21AF3D1D004B72A2 /* ExtensionsBidirectionalCollection.swift */; };
 		452B07CF21AF493F004B72A2 /* ExtensionsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B07CE21AF493F004B72A2 /* ExtensionsArray.swift */; };
-		45855E7021B08B8300E7CF98 /* ExtensionsCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45855E6F21B08B8200E7CF98 /* ExtensionsCalendar.swift */; };
+		454937FF2220B25C009ECF96 /* ExtensionsMutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454937FE2220B25C009ECF96 /* ExtensionsMutableCollection.swift */; };
+		4559D6FD21B23340001538C5 /* ExtensionsCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4559D6FC21B23340001538C5 /* ExtensionsCalendar.swift */; };
+		4573F24321BD5B6A00A788C3 /* ExtensionsUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4573F24221BD5B6A00A788C3 /* ExtensionsUserDefaults.swift */; };
+		45855E7221B09FEB00E7CF98 /* ExtensionsRangeReplaceableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45855E7121B09FEB00E7CF98 /* ExtensionsRangeReplaceableCollection.swift */; };
+		45855E7421B0A90000E7CF98 /* ExtensionsJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45855E7321B0A90000E7CF98 /* ExtensionsJSON.swift */; };
+		4585F7EB222F08140027A117 /* ExtensionsLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585F7EA222F08140027A117 /* ExtensionsLocale.swift */; };
+		45B3CBBF220D2679009A64F9 /* ExtensionsLosslessStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B3CBBE220D2679009A64F9 /* ExtensionsLosslessStringConvertible.swift */; };
 		45D9CEC821A21DFB009FFA68 /* ExtensionsDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D9CEC721A21DFB009FFA68 /* ExtensionsDate.swift */; };
 		45D9CECA21A225C9009FFA68 /* ExtensionsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D9CEC921A225C9009FFA68 /* ExtensionsString.swift */; };
 		45D9CED021A22AC7009FFA68 /* ExtensionsFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D9CECF21A22AC7009FFA68 /* ExtensionsFloatingPoint.swift */; };
@@ -29,6 +35,7 @@
 		45D9CED821A31B61009FFA68 /* ExtensionsUIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D9CED721A31B61009FFA68 /* ExtensionsUIDevice.swift */; };
 		45D9CEDA21A31BFC009FFA68 /* ExtensionsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D9CED921A31BFC009FFA68 /* ExtensionsData.swift */; };
 		45D9CEDE21A46D14009FFA68 /* ExtensionsUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D9CEDD21A46D14009FFA68 /* ExtensionsUIImageView.swift */; };
+		45FBBF042223879A0082DF42 /* ExtensionsRangeExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FBBF032223879A0082DF42 /* ExtensionsRangeExpression.swift */; };
 		9CBD2AFC9681B7FA4D4F543BEEC9B660 /* SwiftlyPro-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 115B86523AE2EDA1905588CF08429BDE /* SwiftlyPro-dummy.m */; };
 		CA51F692202B48466CC7668EBADFD9E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */; };
 		DEF0057233BE710EE3AD21CFAD6E556F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6DFF15000AFE2A371BF499E7AFDA808 /* Foundation.framework */; };
@@ -70,7 +77,13 @@
 		4518254521A5841600A27FAA /* ExtensionsNumeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsNumeric.swift; path = SwiftlyPro/Classes/ExtensionsNumeric.swift; sourceTree = "<group>"; };
 		452B07CC21AF3D1D004B72A2 /* ExtensionsBidirectionalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsBidirectionalCollection.swift; sourceTree = "<group>"; };
 		452B07CE21AF493F004B72A2 /* ExtensionsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsArray.swift; path = SwiftlyPro/Classes/ExtensionsArray.swift; sourceTree = "<group>"; };
-		45855E6F21B08B8200E7CF98 /* ExtensionsCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsCalendar.swift; path = SwiftlyPro/Classes/ExtensionsCalendar.swift; sourceTree = "<group>"; };
+		454937FE2220B25C009ECF96 /* ExtensionsMutableCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsMutableCollection.swift; sourceTree = "<group>"; };
+		4559D6FC21B23340001538C5 /* ExtensionsCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsCalendar.swift; path = SwiftlyPro/Classes/ExtensionsCalendar.swift; sourceTree = "<group>"; };
+		4573F24221BD5B6A00A788C3 /* ExtensionsUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsUserDefaults.swift; path = SwiftlyPro/Classes/ExtensionsUserDefaults.swift; sourceTree = "<group>"; };
+		45855E7121B09FEB00E7CF98 /* ExtensionsRangeReplaceableCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsRangeReplaceableCollection.swift; path = SwiftlyPro/Classes/ExtensionsRangeReplaceableCollection.swift; sourceTree = "<group>"; };
+		45855E7321B0A90000E7CF98 /* ExtensionsJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsJSON.swift; path = SwiftlyPro/Classes/ExtensionsJSON.swift; sourceTree = "<group>"; };
+		4585F7EA222F08140027A117 /* ExtensionsLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsLocale.swift; sourceTree = "<group>"; };
+		45B3CBBE220D2679009A64F9 /* ExtensionsLosslessStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsLosslessStringConvertible.swift; path = SwiftlyPro/Classes/ExtensionsLosslessStringConvertible.swift; sourceTree = "<group>"; };
 		45D9CEC721A21DFB009FFA68 /* ExtensionsDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsDate.swift; path = SwiftlyPro/Classes/ExtensionsDate.swift; sourceTree = "<group>"; };
 		45D9CEC921A225C9009FFA68 /* ExtensionsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsString.swift; path = SwiftlyPro/Classes/ExtensionsString.swift; sourceTree = "<group>"; };
 		45D9CECF21A22AC7009FFA68 /* ExtensionsFloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsFloatingPoint.swift; path = SwiftlyPro/Classes/ExtensionsFloatingPoint.swift; sourceTree = "<group>"; };
@@ -80,6 +93,7 @@
 		45D9CED721A31B61009FFA68 /* ExtensionsUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsUIDevice.swift; path = SwiftlyPro/Classes/ExtensionsUIDevice.swift; sourceTree = "<group>"; };
 		45D9CED921A31BFC009FFA68 /* ExtensionsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsData.swift; path = SwiftlyPro/Classes/ExtensionsData.swift; sourceTree = "<group>"; };
 		45D9CEDD21A46D14009FFA68 /* ExtensionsUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsUIImageView.swift; path = SwiftlyPro/Classes/ExtensionsUIImageView.swift; sourceTree = "<group>"; };
+		45FBBF032223879A0082DF42 /* ExtensionsRangeExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsRangeExpression.swift; sourceTree = "<group>"; };
 		4F02462852570BC88D27D664EC33EF46 /* Pods-SwiftlyPro_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftlyPro_Tests-resources.sh"; sourceTree = "<group>"; };
 		5636CB29BD88E00FBC08127921EBC348 /* Pods_SwiftlyPro_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlyPro_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		567CE3D44233AC3266A7215DC057014B /* Pods-SwiftlyPro_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftlyPro_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -167,19 +181,26 @@
 				452B07CE21AF493F004B72A2 /* ExtensionsArray.swift */,
 				452B07CC21AF3D1D004B72A2 /* ExtensionsBidirectionalCollection.swift */,
 				45D9CED121A22B2A009FFA68 /* ExtensionsBinaryInteger.swift */,
+				4559D6FC21B23340001538C5 /* ExtensionsCalendar.swift */,
 				4518253F21A57B5F00A27FAA /* ExtensionsCharacter.swift */,
 				45D9CED321A22BBA009FFA68 /* ExtensionsCollection.swift */,
 				45D9CED921A31BFC009FFA68 /* ExtensionsData.swift */,
-				45855E6F21B08B8200E7CF98 /* ExtensionsCalendar.swift */,
 				45D9CEC721A21DFB009FFA68 /* ExtensionsDate.swift */,
 				45D9CECF21A22AC7009FFA68 /* ExtensionsFloatingPoint.swift */,
+				45855E7321B0A90000E7CF98 /* ExtensionsJSON.swift */,
+				45B3CBBE220D2679009A64F9 /* ExtensionsLosslessStringConvertible.swift */,
+				454937FE2220B25C009ECF96 /* ExtensionsMutableCollection.swift */,
+				4585F7EA222F08140027A117 /* ExtensionsLocale.swift */,
 				4518254521A5841600A27FAA /* ExtensionsNumeric.swift */,
+				45FBBF032223879A0082DF42 /* ExtensionsRangeExpression.swift */,
+				45855E7121B09FEB00E7CF98 /* ExtensionsRangeReplaceableCollection.swift */,
 				45D9CEC921A225C9009FFA68 /* ExtensionsString.swift */,
 				4518254321A57C2300A27FAA /* ExtensionsStringProtocol.swift */,
 				4518253D21A5011500A27FAA /* ExtensionsTimeZone.swift */,
 				45D9CED721A31B61009FFA68 /* ExtensionsUIDevice.swift */,
 				45D9CED521A31AED009FFA68 /* ExtensionsUIImage.swift */,
 				45D9CEDD21A46D14009FFA68 /* ExtensionsUIImageView.swift */,
+				4573F24221BD5B6A00A788C3 /* ExtensionsUserDefaults.swift */,
 			);
 			name = SwiftlyPro;
 			path = ../..;
@@ -370,6 +391,9 @@
 					459B6477E322A848093EE6EAAEB6BEDA = {
 						LastSwiftMigration = 1010;
 					};
+					80D18AAD58DBB01AB2E5F0089CE0CD49 = {
+						LastSwiftMigration = 1010;
+					};
 				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
@@ -425,17 +449,21 @@
 				4518254021A57B5F00A27FAA /* ExtensionsCharacter.swift in Sources */,
 				45D9CEDA21A31BFC009FFA68 /* ExtensionsData.swift in Sources */,
 				452B07CF21AF493F004B72A2 /* ExtensionsArray.swift in Sources */,
+				45855E7421B0A90000E7CF98 /* ExtensionsJSON.swift in Sources */,
+				4573F24321BD5B6A00A788C3 /* ExtensionsUserDefaults.swift in Sources */,
 				45D9CED821A31B61009FFA68 /* ExtensionsUIDevice.swift in Sources */,
 				45D9CECA21A225C9009FFA68 /* ExtensionsString.swift in Sources */,
 				452B07CD21AF3D1D004B72A2 /* ExtensionsBidirectionalCollection.swift in Sources */,
-				45855E7021B08B8300E7CF98 /* ExtensionsCalendar.swift in Sources */,
 				9CBD2AFC9681B7FA4D4F543BEEC9B660 /* SwiftlyPro-dummy.m in Sources */,
 				4518253E21A5011500A27FAA /* ExtensionsTimeZone.swift in Sources */,
 				45D9CEDE21A46D14009FFA68 /* ExtensionsUIImageView.swift in Sources */,
 				45D9CED021A22AC7009FFA68 /* ExtensionsFloatingPoint.swift in Sources */,
 				45D9CEC821A21DFB009FFA68 /* ExtensionsDate.swift in Sources */,
 				45D9CED621A31AED009FFA68 /* ExtensionsUIImage.swift in Sources */,
+				45B3CBBF220D2679009A64F9 /* ExtensionsLosslessStringConvertible.swift in Sources */,
+				4559D6FD21B23340001538C5 /* ExtensionsCalendar.swift in Sources */,
 				4518254621A5841600A27FAA /* ExtensionsNumeric.swift in Sources */,
+				45855E7221B09FEB00E7CF98 /* ExtensionsRangeReplaceableCollection.swift in Sources */,
 				45D9CED421A22BBA009FFA68 /* ExtensionsCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,6 +472,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				454937FF2220B25C009ECF96 /* ExtensionsMutableCollection.swift in Sources */,
+				4585F7EB222F08140027A117 /* ExtensionsLocale.swift in Sources */,
+				45FBBF042223879A0082DF42 /* ExtensionsRangeExpression.swift in Sources */,
 				2F1EB925B9D797AA5998EA248735F9EF /* Pods-SwiftlyPro_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,6 +671,7 @@
 			baseConfigurationReference = 10961E6AA00910A0FD1C06C5CA04356C /* Pods-SwiftlyPro_Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -662,6 +694,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -707,6 +740,7 @@
 			baseConfigurationReference = 064D43369DFE8334C83E8782382F3220 /* Pods-SwiftlyPro_Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -729,6 +763,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

@@ -6,6 +6,15 @@
 //
 
 import Foundation
+extension BidirectionalCollection {
+    func element(at offset: Int) -> Element? {
+        guard !isEmpty,
+            let index = self.index(startIndex, offsetBy: offset,
+                                   limitedBy: index(before: endIndex))
+        else { return nil }
+        return self[index]
+    }
+}
 extension BidirectionalCollection where Element: BinaryInteger, Index == Int {
     // https://stackoverflow.com/a/52019799/2303865
     // let numbers = [1,2,3,4,10,11,15,20,21,22,23]
