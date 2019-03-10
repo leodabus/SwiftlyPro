@@ -7,9 +7,12 @@
 
 import Foundation
 public extension String {
-    
+    public var data: Data {
+        return Data(utf8)
+        
+    }
     public var iso8601: Date? {
-        return Formatter.Date.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
+        return Formatter.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
     }
     
     public var foldingAccents: String {
@@ -18,7 +21,7 @@ public extension String {
     }
     
     public var html2AttributedString: NSAttributedString? {
-        return Data(utf8).html2AttributedString
+        return data.html2AttributedString
     }
     
     public var html2String: String {

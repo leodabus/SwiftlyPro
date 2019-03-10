@@ -25,6 +25,9 @@
 		45855E7221B09FEB00E7CF98 /* ExtensionsRangeReplaceableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45855E7121B09FEB00E7CF98 /* ExtensionsRangeReplaceableCollection.swift */; };
 		45855E7421B0A90000E7CF98 /* ExtensionsJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45855E7321B0A90000E7CF98 /* ExtensionsJSON.swift */; };
 		4585F7EB222F08140027A117 /* ExtensionsLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585F7EA222F08140027A117 /* ExtensionsLocale.swift */; };
+		45ACAB74223555F500245BAD /* ExtensionsMutableCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454937FE2220B25C009ECF96 /* ExtensionsMutableCollection.swift */; };
+		45ACAB75223555F500245BAD /* ExtensionsLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4585F7EA222F08140027A117 /* ExtensionsLocale.swift */; };
+		45ACAB76223555F500245BAD /* ExtensionsRangeExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FBBF032223879A0082DF42 /* ExtensionsRangeExpression.swift */; };
 		45B3CBBF220D2679009A64F9 /* ExtensionsLosslessStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B3CBBE220D2679009A64F9 /* ExtensionsLosslessStringConvertible.swift */; };
 		45D9CEC821A21DFB009FFA68 /* ExtensionsDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D9CEC721A21DFB009FFA68 /* ExtensionsDate.swift */; };
 		45D9CECA21A225C9009FFA68 /* ExtensionsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D9CEC921A225C9009FFA68 /* ExtensionsString.swift */; };
@@ -75,14 +78,14 @@
 		4518253F21A57B5F00A27FAA /* ExtensionsCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsCharacter.swift; path = SwiftlyPro/Classes/ExtensionsCharacter.swift; sourceTree = "<group>"; };
 		4518254321A57C2300A27FAA /* ExtensionsStringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsStringProtocol.swift; path = SwiftlyPro/Classes/ExtensionsStringProtocol.swift; sourceTree = "<group>"; };
 		4518254521A5841600A27FAA /* ExtensionsNumeric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsNumeric.swift; path = SwiftlyPro/Classes/ExtensionsNumeric.swift; sourceTree = "<group>"; };
-		452B07CC21AF3D1D004B72A2 /* ExtensionsBidirectionalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsBidirectionalCollection.swift; sourceTree = "<group>"; };
+		452B07CC21AF3D1D004B72A2 /* ExtensionsBidirectionalCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsBidirectionalCollection.swift; path = SwiftlyPro/Classes/ExtensionsBidirectionalCollection.swift; sourceTree = "<group>"; };
 		452B07CE21AF493F004B72A2 /* ExtensionsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsArray.swift; path = SwiftlyPro/Classes/ExtensionsArray.swift; sourceTree = "<group>"; };
-		454937FE2220B25C009ECF96 /* ExtensionsMutableCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsMutableCollection.swift; sourceTree = "<group>"; };
+		454937FE2220B25C009ECF96 /* ExtensionsMutableCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsMutableCollection.swift; path = SwiftlyPro/Classes/ExtensionsMutableCollection.swift; sourceTree = "<group>"; };
 		4559D6FC21B23340001538C5 /* ExtensionsCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsCalendar.swift; path = SwiftlyPro/Classes/ExtensionsCalendar.swift; sourceTree = "<group>"; };
 		4573F24221BD5B6A00A788C3 /* ExtensionsUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsUserDefaults.swift; path = SwiftlyPro/Classes/ExtensionsUserDefaults.swift; sourceTree = "<group>"; };
 		45855E7121B09FEB00E7CF98 /* ExtensionsRangeReplaceableCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsRangeReplaceableCollection.swift; path = SwiftlyPro/Classes/ExtensionsRangeReplaceableCollection.swift; sourceTree = "<group>"; };
 		45855E7321B0A90000E7CF98 /* ExtensionsJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsJSON.swift; path = SwiftlyPro/Classes/ExtensionsJSON.swift; sourceTree = "<group>"; };
-		4585F7EA222F08140027A117 /* ExtensionsLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsLocale.swift; sourceTree = "<group>"; };
+		4585F7EA222F08140027A117 /* ExtensionsLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsLocale.swift; path = SwiftlyPro/Classes/ExtensionsLocale.swift; sourceTree = "<group>"; };
 		45B3CBBE220D2679009A64F9 /* ExtensionsLosslessStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsLosslessStringConvertible.swift; path = SwiftlyPro/Classes/ExtensionsLosslessStringConvertible.swift; sourceTree = "<group>"; };
 		45D9CEC721A21DFB009FFA68 /* ExtensionsDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsDate.swift; path = SwiftlyPro/Classes/ExtensionsDate.swift; sourceTree = "<group>"; };
 		45D9CEC921A225C9009FFA68 /* ExtensionsString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsString.swift; path = SwiftlyPro/Classes/ExtensionsString.swift; sourceTree = "<group>"; };
@@ -93,7 +96,7 @@
 		45D9CED721A31B61009FFA68 /* ExtensionsUIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsUIDevice.swift; path = SwiftlyPro/Classes/ExtensionsUIDevice.swift; sourceTree = "<group>"; };
 		45D9CED921A31BFC009FFA68 /* ExtensionsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsData.swift; path = SwiftlyPro/Classes/ExtensionsData.swift; sourceTree = "<group>"; };
 		45D9CEDD21A46D14009FFA68 /* ExtensionsUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsUIImageView.swift; path = SwiftlyPro/Classes/ExtensionsUIImageView.swift; sourceTree = "<group>"; };
-		45FBBF032223879A0082DF42 /* ExtensionsRangeExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionsRangeExpression.swift; sourceTree = "<group>"; };
+		45FBBF032223879A0082DF42 /* ExtensionsRangeExpression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExtensionsRangeExpression.swift; path = SwiftlyPro/Classes/ExtensionsRangeExpression.swift; sourceTree = "<group>"; };
 		4F02462852570BC88D27D664EC33EF46 /* Pods-SwiftlyPro_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftlyPro_Tests-resources.sh"; sourceTree = "<group>"; };
 		5636CB29BD88E00FBC08127921EBC348 /* Pods_SwiftlyPro_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftlyPro_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		567CE3D44233AC3266A7215DC057014B /* Pods-SwiftlyPro_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftlyPro_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -444,6 +447,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45ACAB74223555F500245BAD /* ExtensionsMutableCollection.swift in Sources */,
+				45ACAB75223555F500245BAD /* ExtensionsLocale.swift in Sources */,
+				45ACAB76223555F500245BAD /* ExtensionsRangeExpression.swift in Sources */,
 				4518254421A57C2300A27FAA /* ExtensionsStringProtocol.swift in Sources */,
 				45D9CED221A22B2A009FFA68 /* ExtensionsBinaryInteger.swift in Sources */,
 				4518254021A57B5F00A27FAA /* ExtensionsCharacter.swift in Sources */,

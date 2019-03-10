@@ -9,8 +9,8 @@ import Foundation
 public extension StringProtocol {
   
     /// returns an array of all ascii values of the string
-    public var ascii: [UInt32] {
-        return compactMap { $0.ascii }
+    public var ascii: [UInt8] {
+        return compactMap { $0.asciiValue }
     }
 
     // subscripting the string with Int
@@ -250,8 +250,12 @@ public extension StringProtocol {
 }
 extension StringProtocol {
     var hexa2Bytes: [UInt8] {
-        let hexa = Array(self)
-        return stride(from: 0, to: count, by: 2).compactMap { UInt8(String(hexa[$0..<$0.advanced(by: 2)]), radix: 16) }
+        var start = startIndex
+        return stride(from: 0, to: count, by: 2).compactMap {  _ in
+            let end = index(start, offsetBy: 2, limitedBy: endIndex) ?? endIndex
+            defer { start = end }
+            return UInt8(self[start..<end], radix: 16)
+        }
     }
 }
 
@@ -262,7 +266,6 @@ extension StringProtocol where Self: RangeReplaceableCollection {
                 insert(contentsOf: separator, at: index)
         }
     }
-    
     func inserting(separator: Self, every n: Int) -> Self {
         var string = self
         string.insert(separator: separator, every: n)

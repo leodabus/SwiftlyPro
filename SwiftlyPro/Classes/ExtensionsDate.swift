@@ -8,32 +8,31 @@
 import Foundation
 
 public extension Formatter {
-    public struct Date {
-        public static let iso8601: DateFormatter = {
-            let formatter = DateFormatter()
-            #if os(Linux)
-            formatter.calendar = Calendar(identifier: .gregorian)
-            #else
-            formatter.calendar = Calendar(identifier: .iso8601)
-            #endif
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-            return formatter
-        }()
-        static let iso8601standard: DateFormatter = {
-            let formatter = DateFormatter()
-            #if os(Linux)
-            formatter.calendar = Calendar(identifier: .gregorian)
-            #else
-            formatter.calendar = Calendar(identifier: .iso8601)
-            #endif
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
-            return formatter
-        }()
-    }
+    public static let iso8601: DateFormatter = {
+        let formatter = DateFormatter()
+        #if os(Linux)
+        formatter.calendar = Calendar(identifier: .gregorian)
+        #else
+        formatter.calendar = Calendar(identifier: .iso8601)
+        #endif
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
+    static let iso8601standard: DateFormatter = {
+        let formatter = DateFormatter()
+        #if os(Linux)
+        formatter.calendar = Calendar(identifier: .gregorian)
+        #else
+        formatter.calendar = Calendar(identifier: .iso8601)
+        #endif
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXXXX"
+        return formatter
+    }()
+    
 }
 
 public extension Date {
@@ -70,7 +69,7 @@ public extension Date {
     }
 
     public var iso8601: String {
-        return Formatter.Date.iso8601.string(from: self)
+        return Formatter.iso8601.string(from: self)
     }
 
     /// Returns all components using the current calendar time zone.
