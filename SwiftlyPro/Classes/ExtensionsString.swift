@@ -7,24 +7,24 @@
 
 import Foundation
 public extension String {
-    public var data: Data {
+    var data: Data {
         return Data(utf8)
         
     }
-    public var iso8601: Date? {
+    var iso8601: Date? {
         return Formatter.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
     }
     
-    public var foldingAccents: String {
+    var foldingAccents: String {
      
         return folding(options: .diacriticInsensitive, locale: .posix)
     }
     
-    public var html2AttributedString: NSAttributedString? {
+    var html2AttributedString: NSAttributedString? {
         return data.html2AttributedString
     }
     
-    public var html2String: String {
+    var html2String: String {
         return html2AttributedString?.string ?? ""
     }
 }
@@ -60,7 +60,7 @@ extension String {
         guard
             let inputMessage = data(using: .isoLatin1),
             let qrCode = CIFilter(name: "CIQRCodeGenerator",
-                                  withInputParameters: ["inputMessage": inputMessage,
+                                  parameters: ["inputMessage": inputMessage,
                                                "inputCorrectionLevel": "M"])
             else { return nil }
         guard let image = qrCode.outputImage
@@ -71,7 +71,7 @@ extension String {
         defer { UIGraphicsEndImageContext() }
         guard
             let falseColor = CIFilter(name: "CIFalseColor",
-                                      withInputParameters: ["inputImage" : image.transformed(by: scale),
+                                      parameters: ["inputImage" : image.transformed(by: scale),
                                                    "inputColor1": CIColor(color: background) ,
                                                    "inputColor0": CIColor(color: color)]),
             let coloredImage = falseColor.outputImage,

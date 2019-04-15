@@ -8,11 +8,11 @@
 import Foundation
 public extension Character {
     // this is already implemented in Swift 5
-    public var isASCII: Bool {
+    var isASCII: Bool {
         return asciiValue != nil
     }
     // this is already implemented in Swift 5
-    public var asciiValue: UInt8? {
+    var asciiValue: UInt8? {
         guard self != "\r\n" else { return 10 }
         return unicodeScalars.index(after: unicodeScalars.startIndex) != unicodeScalars.endIndex || unicodeScalars.first!.value >= 128 ? nil : UInt8(unicodeScalars.first!.value)
     }

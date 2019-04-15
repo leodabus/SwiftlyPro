@@ -12,14 +12,14 @@ public extension UIImage {
     ///
     /// - Parameters:
     ///     - percentage: Of how much you would like to resize the image
-    public func resized(withPercentage percentage: CGFloat) -> UIImage? {
+    func resized(withPercentage percentage: CGFloat) -> UIImage? {
         let canvasSize = CGSize(width: size.width * percentage, height: size.height * percentage)
         UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
         defer { UIGraphicsEndImageContext() }
         draw(in: CGRect(origin: .zero, size: canvasSize))
         return UIGraphicsGetImageFromCurrentImageContext()
     }
-    public func resized(toWidth width: CGFloat) -> UIImage? {
+    func resized(toWidth width: CGFloat) -> UIImage? {
         let canvasSize = CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))
         UIGraphicsBeginImageContextWithOptions(canvasSize, false, scale)
         defer { UIGraphicsEndImageContext() }
@@ -29,14 +29,14 @@ public extension UIImage {
 }
 
 public extension UIImage {
-    public var isLandscape: Bool    { return size.width > size.height }
-    public var isPortrait:  Bool    { return size.height > size.width }
-    public var lenghtBleed: CGFloat { return isLandscape ? size.width-size.height :
+    var isLandscape: Bool    { return size.width > size.height }
+    var isPortrait:  Bool    { return size.height > size.width }
+    var lenghtBleed: CGFloat { return isLandscape ? size.width-size.height :
         size.height-size.width }
-    public var breadth:     CGFloat { return min(size.width, size.height) }
-    public var breadthSize: CGSize  { return CGSize(width: breadth, height: breadth) }
-    public var breadthRect: CGRect  { return CGRect(origin: .zero, size: breadthSize) }
-    public var circleMasked: UIImage? {
+    var breadth:     CGFloat { return min(size.width, size.height) }
+    var breadthSize: CGSize  { return CGSize(width: breadth, height: breadth) }
+    var breadthRect: CGRect  { return CGRect(origin: .zero, size: breadthSize) }
+    var circleMasked: UIImage? {
         UIGraphicsBeginImageContextWithOptions(breadthSize, false, scale)
         defer { UIGraphicsEndImageContext() }
         guard let cgImage = cgImage?.cropping(to: CGRect(origin: CGPoint(x: isLandscape ? floor((size.width - size.height) / 2) : 0, y: isPortrait  ? floor((size.height - size.width) / 2) : 0), size: breadthSize)) else { return nil }
@@ -59,19 +59,19 @@ public extension UIImage {
     //        let bottomLeft = bottomHalf?.leftHalf
     //        let bottomRight = bottomHalf?.rightHalf
     //    }
-    public var topHalf: UIImage? {
+    var topHalf: UIImage? {
         guard let cgImage = cgImage, let image = cgImage.cropping(to: CGRect(origin: .zero, size: CGSize(width: size.width, height: size.height/2))) else { return nil }
         return UIImage(cgImage: image, scale: 1, orientation: imageOrientation)
     }
-    public var bottomHalf: UIImage? {
+    var bottomHalf: UIImage? {
         guard let cgImage = cgImage, let image = cgImage.cropping(to: CGRect(origin: CGPoint(x: 0,  y: CGFloat(Int(size.height)-Int(size.height/2))), size: CGSize(width: size.width, height: CGFloat(Int(size.height) - Int(size.height/2))))) else { return nil }
         return UIImage(cgImage: image)
     }
-    public var leftHalf: UIImage? {
+    var leftHalf: UIImage? {
         guard let cgImage = cgImage, let image = cgImage.cropping(to: CGRect(origin: .zero, size: CGSize(width: size.width/2, height: size.height))) else { return nil }
         return UIImage(cgImage: image)
     }
-    public var rightHalf: UIImage? {
+    var rightHalf: UIImage? {
         guard let cgImage = cgImage, let image = cgImage.cropping(to: CGRect(origin: CGPoint(x: CGFloat(Int(size.width)-Int((size.width/2))), y: 0), size: CGSize(width: CGFloat(Int(size.width)-Int((size.width/2))), height: size.height)))
             else { return nil }
         return UIImage(cgImage: image)
@@ -83,7 +83,7 @@ public extension UIImage {
     //        print(face.size)
     //    }
     // set highAccuracy to true if the detector should choose techniques that are higher in accuracy, even if it requires more processing time.
-    public func detectFaces(highAccuracy: Bool = false) -> [UIImage] {
+    func detectFaces(highAccuracy: Bool = false) -> [UIImage] {
         guard let ciimage = CIImage(image: self) else { return [] }
         var orientation: NSNumber {
             switch imageOrientation {
@@ -95,6 +95,8 @@ public extension UIImage {
             case .right:         return 6
             case .rightMirrored: return 7
             case .left:          return 8
+            @unknown default:
+                fatalError()
             }
         }
         return CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy: highAccuracy ? CIDetectorAccuracyHigh : CIDetectorAccuracyLow])?
@@ -133,7 +135,7 @@ public extension UIImage {
     /// - Parameters:
     ///   - color: color to be used.
     /// - Returns: the image instance tinted with the specified color.
-    public func tinted(with color: UIColor) -> UIImage? {
+    func tinted(with color: UIColor) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         defer { UIGraphicsEndImageContext() }
         color.set()
@@ -146,7 +148,7 @@ public extension UIImage {
     // let redCmera = camera.tinted(with: .red)
     //
     
-    public func filled(with color: UIColor, blendMode: CGBlendMode = .multiply) -> UIImage? {
+    func filled(with color: UIColor, blendMode: CGBlendMode = .multiply) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         defer { UIGraphicsEndImageContext() }
         guard

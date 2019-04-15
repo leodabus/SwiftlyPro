@@ -6,9 +6,9 @@
 //
 
 import Foundation
-public extension MutableCollection where Element: StringProtocol, Element.Index == String.Index, Self: RandomAccessCollection {
+public extension MutableCollection where Element: StringProtocol, Self: RandomAccessCollection {
     
-    public mutating func caseInsensitiveSort(by predicate: (Self.Element, Self.Element) throws -> Bool) rethrows  {
+    mutating func caseInsensitiveSort(by predicate: (Self.Element, Self.Element) throws -> Bool) rethrows  {
         let result: ComparisonResult
         if try predicate("a","b") {
             print("ascending")
@@ -20,14 +20,17 @@ public extension MutableCollection where Element: StringProtocol, Element.Index 
         sort { $0.caseInsensitiveCompare($1) == result }
     }
     
-    public mutating func caseInsensitiveSort(_ result: ComparisonResult) {
+    mutating func caseInsensitiveSort(_ result: ComparisonResult) {
         sort { $0.caseInsensitiveCompare($1) == result }
     }
-    public mutating func caseInsensitiveSort() {
+    mutating func caseInsensitiveSort() {
         sort(by: <)
     }
     
-    public mutating func localizedSort(_ result: ComparisonResult) {
+    mutating func localizedSort(_ result: ComparisonResult) {
         sort { $0.localizedCompare($1) == result }
+    }
+    mutating func localizedStandardSort(_ result: ComparisonResult) {
+        sort { $0.localizedStandardCompare($1) == result }
     }
 }

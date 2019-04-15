@@ -9,41 +9,41 @@ import Foundation
 public extension StringProtocol {
   
     /// returns an array of all ascii values of the string
-    public var ascii: [UInt8] {
+    var ascii: [UInt8] {
         return compactMap { $0.asciiValue }
     }
 
     // subscripting the string with Int
-    public subscript(offset: Int) -> Element {
+    subscript(offset: Int) -> Element {
         return self[index(startIndex, offsetBy: offset)]
     }
     
-    public subscript(_ range: CountableRange<Int>) -> SubSequence {
+    subscript(_ range: CountableRange<Int>) -> SubSequence {
         return prefix(range.lowerBound + range.count)
             .suffix(range.count)
     }
-    public subscript(range: CountableClosedRange<Int>) -> SubSequence {
+    subscript(range: CountableClosedRange<Int>) -> SubSequence {
         return prefix(range.lowerBound + range.count)
             .suffix(range.count)
     }
     
-    public subscript(range: PartialRangeThrough<Int>) -> SubSequence {
+    subscript(range: PartialRangeThrough<Int>) -> SubSequence {
         return prefix(range.upperBound.advanced(by: 1))
     }
-    public subscript(range: PartialRangeUpTo<Int>) -> SubSequence {
+    subscript(range: PartialRangeUpTo<Int>) -> SubSequence {
         return prefix(range.upperBound)
     }
-    public subscript(range: PartialRangeFrom<Int>) -> SubSequence {
+    subscript(range: PartialRangeFrom<Int>) -> SubSequence {
         return suffix(Swift.max(0, count - range.lowerBound))
     }
 }
 
 public extension StringProtocol where Index == String.Index {
     
-    public var range: Range<Index> {
+    var range: Range<Index> {
         return startIndex..<endIndex
     }
-    public var nsRange: NSRange {
+    var nsRange: NSRange {
         return NSRange(range, in: self)
     }
 
@@ -51,11 +51,11 @@ public extension StringProtocol where Index == String.Index {
         return range(of: string, options: options)?.lowerBound
     }
     
-    public func endIndex(of string: Self, options: String.CompareOptions = []) -> Index? {
+    func endIndex(of string: Self, options: String.CompareOptions = []) -> Index? {
         return range(of: string, options: options)?.upperBound
     }
     
-    public func indexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
+    func indexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
         var result: [Index] = []
         var start = startIndex
         while start < endIndex,
@@ -67,7 +67,7 @@ public extension StringProtocol where Index == String.Index {
         return result
     }
     
-    public func endIndexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
+    func endIndexes(of string: Self, options: String.CompareOptions = []) -> [Index] {
         var result: [Index] = []
         var start = startIndex
         while start < endIndex,
@@ -78,7 +78,7 @@ public extension StringProtocol where Index == String.Index {
         }
         return result
     }
-    public func ranges(of string: Self, options: String.CompareOptions = []) -> [Range<Index>] {
+    func ranges(of string: Self, options: String.CompareOptions = []) -> [Range<Index>] {
         var result: [Range<Index>] = []
         var start = startIndex
         while start < endIndex,
@@ -90,12 +90,12 @@ public extension StringProtocol where Index == String.Index {
         return result
     }
     
-    public func nsRange(of string: Self, options: String.CompareOptions = [], range: Range<Index>? = nil, locale: Locale? = nil) -> NSRange? {
+    func nsRange(of string: Self, options: String.CompareOptions = [], range: Range<Index>? = nil, locale: Locale? = nil) -> NSRange? {
         guard let range = self.range(of: string, options: options, range: range ?? startIndex..<endIndex, locale: locale ?? .current) else { return nil }
         return NSRange(range, in: self)
     }
     
-    public func nsRanges(of string: Self, options: String.CompareOptions = [], range: Range<Index>? = nil, locale: Locale? = nil) -> [NSRange] {
+    func nsRanges(of string: Self, options: String.CompareOptions = [], range: Range<Index>? = nil, locale: Locale? = nil) -> [NSRange] {
         var start = range?.lowerBound ?? startIndex
         let end = range?.upperBound ?? endIndex
         var ranges: [NSRange] = []
@@ -108,13 +108,6 @@ public extension StringProtocol where Index == String.Index {
     
     func nsRange(from range: Range<Index>) -> NSRange {
         return NSRange(range, in: self)
-    }
-
-    public func encodedOffset(of element: Element) -> Int? {
-        return index(of: element)?.encodedOffset
-    }
-    public func encodedOffset(of string: Self) -> Int? {
-        return range(of: string)?.lowerBound.encodedOffset
     }
 
     //    Finds a text between two strings and returns it
@@ -188,7 +181,7 @@ public extension StringProtocol where Index == String.Index {
 
 
 public extension StringProtocol {
-    public var isValidCPF: Bool {
+    var isValidCPF: Bool {
         let numbers = compactMap({ Int(String($0)) })
         guard numbers.count == 11 && Set(numbers).count != 1 else { return false }
         let soma1 = 11 - ( numbers[0] * 10 +
@@ -215,7 +208,7 @@ public extension StringProtocol {
         return dv1 == numbers[9] && dv2 == numbers[10]
     }
     
-    public var isValidCNPJ: Bool {
+    var isValidCNPJ: Bool {
         let numbers = compactMap({ Int(String($0)) })
         guard numbers.count == 14 && Set(numbers).count != 1 else { return false }
         let soma1 = 11 - ( numbers[11] * 2 +
@@ -274,10 +267,11 @@ extension StringProtocol where Self: RangeReplaceableCollection {
 }
 extension StringProtocol where Index == String.Index {
     func distance(to element: Element) -> Int? {
-        guard let index = index(of: element) else { return nil }
+        guard let index = firstIndex(of: element) else { return nil }
         return distance(from: startIndex, to: index)
     }
     func distance(to string: Self, options: String.CompareOptions = []) -> Int? {
-        return range(of: string, options: options)?.lowerBound.encodedOffset
+        guard let index = range(of: string, options: options)?.lowerBound else { return nil }
+        return distance(from: startIndex, to: index)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 public extension Formatter {
-    public static let iso8601: DateFormatter = {
+    static let iso8601: DateFormatter = {
         let formatter = DateFormatter()
         #if os(Linux)
         formatter.calendar = Calendar(identifier: .gregorian)
@@ -37,73 +37,73 @@ public extension Formatter {
 
 public extension Date {
     /// Returns a new Date representing the date calculated by adding an amount of a specific component using current calendar
-    public func adding(_ component:  Calendar.Component, value: Int, wrappingComponents: Bool = false, calendar: Calendar = .current) -> Date? {
+    func adding(_ component:  Calendar.Component, value: Int, wrappingComponents: Bool = false, calendar: Calendar = .current) -> Date? {
         return calendar.date(byAdding: component, value: value, to: self, wrappingComponents: wrappingComponents)
     }
     /// Returns a new Date representing the date calculated by setting hour, minute, and second using current calendar
-    public func setting(hour:  Int, minute: Int, second: Int, matchingPolicy: Calendar.MatchingPolicy = .strict, repeatedTimePolicy: Calendar.RepeatedTimePolicy = .first, direction: Calendar.SearchDirection = .forward, calendar: Calendar = .current) -> Date? {
+    func setting(hour:  Int, minute: Int, second: Int, matchingPolicy: Calendar.MatchingPolicy = .strict, repeatedTimePolicy: Calendar.RepeatedTimePolicy = .first, direction: Calendar.SearchDirection = .forward, calendar: Calendar = .current) -> Date? {
         return calendar.date(bySettingHour: hour, minute: minute, second: second, of: self, matchingPolicy: matchingPolicy, repeatedTimePolicy: repeatedTimePolicy, direction: direction)
     }
     
-    public var noon: Date {
+    var noon: Date {
         return setting(hour: 12, minute: 0, second: 0)!
     }
     
 
-    public static var yesterday: Date {
+    static var yesterday: Date {
         return Date().noon.adding(.day, value: -1)!
     }
-    public static var today: Date {
+    static var today: Date {
         return Date().noon
     }
-    public static var tomorrow: Date {
+    static var tomorrow: Date {
         return Date().noon.adding(.day, value: 1)!
     }
     
     
-    public var dayBefore: Date {
+    var dayBefore: Date {
         return noon.adding(.day, value: -1)!
     }
-    public var dayAfter: Date {
+    var dayAfter: Date {
         return noon.adding(.day, value: 1)!
     }
 
-    public var iso8601: String {
+    var iso8601: String {
         return Formatter.iso8601.string(from: self)
     }
 
     /// Returns all components using the current calendar time zone.
-    public func dateComponents(_ components: Set<Calendar.Component>) -> DateComponents {
+    func dateComponents(_ components: Set<Calendar.Component>) -> DateComponents {
         return Calendar.current.dateComponents(components, from: self)
     }
-    public var startOfWeek: Date {
+    var startOfWeek: Date {
         return Calendar.current.date(from: dateComponents([.yearForWeekOfYear, .weekOfYear]))!
     }
-    public var daysOfWeek: [Date] {
+    var daysOfWeek: [Date] {
         let startOfWeek = self.startOfWeek
         return (0...6).compactMap{ startOfWeek.adding(.day, value: $0) }
     }
 
     
-    public var hour:    Int { return Calendar.current.component(.hour,   from: self) }
-    public var minute:  Int { return Calendar.current.component(.minute, from: self) }
-    public var second:  Int { return Calendar.current.component(.second, from: self) }
-    public var year:    Int { return Calendar.current.component(.year,   from: self) }
-    public var month:   Int { return Calendar.current.component(.month,  from: self) }
-    public var day:     Int { return Calendar.current.component(.day,    from: self) }
-    public var weekday: Int { return Calendar.current.component(.weekday,from: self) }
+    var hour:    Int { return Calendar.current.component(.hour,   from: self) }
+    var minute:  Int { return Calendar.current.component(.minute, from: self) }
+    var second:  Int { return Calendar.current.component(.second, from: self) }
+    var year:    Int { return Calendar.current.component(.year,   from: self) }
+    var month:   Int { return Calendar.current.component(.month,  from: self) }
+    var day:     Int { return Calendar.current.component(.day,    from: self) }
+    var weekday: Int { return Calendar.current.component(.weekday,from: self) }
     
-    public var nextSecond: Date {
+    var nextSecond: Date {
         let date = self
         return Calendar.current.date(bySettingHour: date.hour, minute: date.minute, second: date.second + 1, of: date) ?? Date()
     }
-    public var daysInMonth: Int {
+    var daysInMonth: Int {
         return Calendar.current.range(of: .day, in: .month, for: self)!.count
     }
-    public var daysInYear: Int {
+    var daysInYear: Int {
         return Calendar.current.range(of: .day, in: .year, for: self)!.count
     }
-    public var nextShift: Date {
+    var nextShift: Date {
         guard let hour = dateComponents.hour, let year = dateComponents.year, let month = dateComponents.month, let day = dateComponents.day
             else { return Date() }
         switch hour {
@@ -122,16 +122,16 @@ public extension Date {
         //        }
         //        return  Calendar.autoupdatingCurrent.dateWithEra(1, year: date.year, month: date.month, day: date.day+1, hour: 6, minute: 0, second: 0, nanosecond: 0)!
     }
-    public var nanosecond: Int {
+    var nanosecond: Int {
         return Calendar.current.component(.nanosecond, from: self)
     }
-    public var allComponents: DateComponents {
+    var allComponents: DateComponents {
         return Calendar.current.dateComponents(in: .current, from: self)
     }
-     public var dateComponents: DateComponents {
+    var dateComponents: DateComponents {
         return  Calendar.current.dateComponents([.year,.month,.day], from: self)
     }
-    public  var timeComponents: DateComponents {
+    var timeComponents: DateComponents {
         return  Calendar.current.dateComponents([.hour,.minute,.second], from: self)
     }
     

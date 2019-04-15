@@ -34,8 +34,8 @@ class ViewController: UIViewController {
         // Note that they all return a Substring of the original String.
         // To create a new String you need to add .string as follow
         print(test[10...].string)  // "🇺🇸!!! Hello Brazil 🇧🇷!!!"
-        let arr = [1,2,3]
-        print(arr[safe: 3] ?? "nil")
+//        let arr = [1,2,3]
+//        print(arr[safe: 3] ?? "nil")
 //        "word"
         let array5 = ["Cafe B","Café C","Café A"]
         let sorted5 = array5.localizedSorted(.orderedAscending)

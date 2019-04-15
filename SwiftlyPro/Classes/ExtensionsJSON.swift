@@ -8,7 +8,7 @@
 import Foundation
 
 public extension JSONDecoder.DateDecodingStrategy {
-    public static let customISO8601 = custom { decoder throws -> Date in
+    static let customISO8601 = custom { decoder throws -> Date in
         let container = try decoder.singleValueContainer()
         let string = try container.decode(String.self)
         if let date = Formatter.iso8601.date(from: string) ?? Formatter.iso8601standard.date(from: string) {
@@ -18,7 +18,7 @@ public extension JSONDecoder.DateDecodingStrategy {
     }
 }
 public extension JSONEncoder.DateEncodingStrategy {
-    public static let customISO8601 = custom { date, encoder throws in
+    static let customISO8601 = custom { date, encoder throws in
         var container = encoder.singleValueContainer()
         try container.encode(Formatter.iso8601.string(from: date))
     }

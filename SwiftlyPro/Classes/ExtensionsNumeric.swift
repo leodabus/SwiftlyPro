@@ -8,24 +8,24 @@
 import Foundation
 public extension Numeric {
     
-    public mutating func square() {
+    mutating func square() {
         self = self * self
     }
     
-    public mutating func cube() {
+    mutating func cube() {
         self = self * self * self
     }
     
-    public var squared: Self {
+    var squared: Self {
         return self * self
     }
 
-    public var cubic: Self {
+    var cubic: Self {
         return self * self * self
     }
 
     
-    public var data: Data {
+    var data: Data {
         var source = self
         return Data(bytes: &source, count: MemoryLayout<Self>.size)
     }
